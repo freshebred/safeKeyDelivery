@@ -193,7 +193,7 @@ app.get('/safekey/api/admin/keys', adminAuth, (req, res) => {
         try {
             return {
                 id: k.id,
-                pin: k.pin.slice(0, -4) + '****',
+                pin: k.pin,
                 gameKey: decrypt(k.encryptedGameKey),
                 memo: decrypt(k.encryptedMemo),
                 redeemed: k.redeemed,
@@ -204,7 +204,7 @@ app.get('/safekey/api/admin/keys', adminAuth, (req, res) => {
         } catch {
             return {
                 id: k.id,
-                pin: k.pin.slice(0, -4) + '****',
+                pin: k.pin,
                 gameKey: '[Lỗi giải mã]',
                 memo: '[Lỗi giải mã]',
                 redeemed: k.redeemed,

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nom safekey | delivery system</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="glass-panel">
+        <div class="branding">
+            <h1>nom safekey</h1>
+            <p>delivery system</p>
+        </div>
+
+        <div id="alert-box" class="alert"></div>
+
+        <!-- Step 1: Nhập PIN -->
+        <div id="step-1" class="step active">
+            <div class="form-group">
+                <label for="pin">Mã PIN</label>
+                <input type="text" id="pin" class="form-control" placeholder="xxxx-xxxx" autocomplete="off" maxlength="9">
+            </div>
+            <button id="btn-next-1" class="btn btn-primary">
+                <span>Tiếp tục</span>
+                <div class="spinner"></div>
+            </button>
+        </div>
+
+        <!-- Step 2: Nhập Email -->
+        <div id="step-2" class="step">
+            <p style="margin-bottom: 20px; font-size: 14px; color: var(--text-secondary); line-height: 1.5;">
+                Mã key hợp lệ. Vui lòng nhập email của bạn để nhận <strong>Mã Xác Thực Riêng Tư</strong>.
+            </p>
+            <div class="form-group">
+                <label for="email">Địa chỉ Email</label>
+                <input type="email" id="email" class="form-control" placeholder="example@email.com">
+            </div>
+            <button id="btn-next-2" class="btn btn-primary">
+                <span>Gửi Mã</span>
+                <div class="spinner"></div>
+            </button>
+            <button id="btn-back-1" class="btn btn-secondary" style="margin-top: 10px;">Quay lại</button>
+        </div>
+
+        <!-- Step 3: Nhập Private Code -->
+        <div id="step-3" class="step">
+            <p style="margin-bottom: 20px; font-size: 14px; color: var(--text-secondary); line-height: 1.5;">
+                Mã xác thực đã được gửi tới email của bạn. Vui lòng kiểm tra hộp thư đến (hoặc thư rác).
+            </p>
+            <div class="form-group">
+                <label for="private-code">Mã Xác Thực Riêng Tư</label>
+                <input type="text" id="private-code" class="form-control" placeholder="xxxx" autocomplete="off" maxlength="4">
+            </div>
+            <button id="btn-reveal" class="btn btn-primary">
+                <span>Mở Khóa Key</span>
+                <div class="spinner"></div>
+            </button>
+            <button id="btn-back-2" class="btn btn-secondary" style="margin-top: 10px;">Quay lại</button>
+        </div>
+
+        <!-- Step 4: Hiển thị Key -->
+        <div id="step-4" class="step">
+            <div style="text-align: center; margin-bottom: 10px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <h2 style="margin: 10px 0; color: #10b981;">Đã Mở Khóa</h2>
+            </div>
+            
+            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 5px;">Game Key:</p>
+            <div class="secret-container">
+                <button id="btn-copy-key" class="copy-btn">Copy</button>
+                <div id="revealed-key" class="secret-content"></div>
+                <div class="redacted-overlay">ĐÃ BỊ CHE KHUẤT</div>
+            </div>
+
+            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 5px;">Ghi chú đính kèm:</p>
+            <div class="secret-container" style="min-height: 60px;">
+                <button id="btn-copy-memo" class="copy-btn">Copy</button>
+                <div id="revealed-memo" class="secret-content" style="font-size: 14px;"></div>
+                <div class="redacted-overlay">ĐÃ BỊ CHE KHUẤT</div>
+            </div>
+
+            <p style="font-size: 12px; color: #ef4444; text-align: center; margin-top: 20px;">
+                ⚠️ Chú ý: Key sẽ bị làm mờ nếu bạn chuyển tab, ẩn cửa sổ, hoặc chụp màn hình. Vui lòng sử dụng nút Copy.
+            </p>
+            
+            <button onclick="location.reload()" class="btn btn-secondary" style="margin-top: 20px;">Trang chủ</button>
+        </div>
+
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

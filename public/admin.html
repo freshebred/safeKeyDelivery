@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị | nom safekey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="glass-panel" id="login-container">
+        <div class="branding">
+            <h1>nom safekey</h1>
+            <p>Trang quản trị (Admin)</p>
+        </div>
+
+        <div id="login-alert" class="alert"></div>
+
+        <div class="form-group">
+            <label for="admin-pw">Mật khẩu admin</label>
+            <input type="password" id="admin-pw" class="form-control" placeholder="••••••••">
+        </div>
+        <button id="btn-login" class="btn btn-primary">
+            <span>Đăng Nhập</span>
+            <div class="spinner"></div>
+        </button>
+    </div>
+
+    <div class="glass-panel admin-panel" id="admin-container" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <div class="branding" style="margin: 0; text-align: left;">
+                <h1 style="font-size: 24px;">nom safekey</h1>
+                <p>Quản lý dữ liệu</p>
+            </div>
+            <button id="btn-logout" class="btn btn-secondary" style="width: auto; padding: 10px 20px;">Đăng
+                xuất</button>
+        </div>
+
+        <div id="admin-alert" class="alert"></div>
+
+        <!-- Form tạo key mới -->
+        <div
+            style="background: rgba(15, 23, 42, 0.5); padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--border-color);">
+            <h3 style="margin-bottom: 20px; font-size: 18px;">Tạo Key Mới</h3>
+            <div class="form-group">
+                <label for="new-game-key">Game Key</label>
+                <input type="text" id="new-game-key" class="form-control"
+                    placeholder="Nhập key game (VD: ABCD-1234-EFGH-5678)">
+            </div>
+            <div class="form-group">
+                <label for="new-memo">Ghi chú (Memo)</label>
+                <textarea id="new-memo" class="form-control" rows="3"
+                    placeholder="Ghi chú thêm về key (VD: Kích hoạt trên Steam)"></textarea>
+            </div>
+            <button id="btn-create" class="btn btn-primary">
+                <span>Tạo Key & Sinh PIN</span>
+                <div class="spinner"></div>
+            </button>
+        </div>
+
+        <!-- Bảng danh sách Keys -->
+        <h3 style="margin-bottom: 15px; font-size: 18px;">Danh sách Key</h3>
+        <button id="btn-refresh" class="btn btn-secondary"
+            style="width: auto; padding: 8px 15px; margin-bottom: 15px; font-size: 13px;">🔄 Làm mới dữ liệu</button>
+
+        <div class="table-responsive">
+            <table id="keys-table">
+                <thead>
+                    <tr>
+                        <th>PIN</th>
+                        <th>Game Key</th>
+                        <th>Memo</th>
+                        <th>Trạng Thái</th>
+                        <th>Người nhận</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="keys-tbody">
+                    <!-- Dữ liệu render từ JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

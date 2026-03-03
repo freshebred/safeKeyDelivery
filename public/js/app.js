@@ -71,7 +71,7 @@ btnNext1.addEventListener('click', async () => {
 
     setLoading(btnNext1, true);
     try {
-        const res = await fetch('/api/redeem/lookup', {
+        const res = await fetch('/safekey/api/redeem/lookup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ pin })
@@ -97,7 +97,7 @@ btnNext2.addEventListener('click', async () => {
 
     setLoading(btnNext2, true);
     try {
-        const res = await fetch('/api/redeem/send-code', {
+        const res = await fetch('/safekey/api/redeem/send-code', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ pin: currentPin, email })
@@ -124,7 +124,7 @@ btnReveal.addEventListener('click', async () => {
 
     setLoading(btnReveal, true);
     try {
-        const res = await fetch('/api/redeem/verify', {
+        const res = await fetch('/safekey/api/redeem/verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ pin: currentPin, privateCode })

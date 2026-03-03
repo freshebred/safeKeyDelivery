@@ -67,7 +67,7 @@ btnLogin.addEventListener('click', async () => {
 
     setLoading(btnLogin, true);
     try {
-        const res = await fetch('/api/admin/login', {
+        const res = await fetch('/safekey/api/admin/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password })
@@ -89,7 +89,7 @@ btnLogin.addEventListener('click', async () => {
 
 btnLogout.addEventListener('click', async () => {
     try {
-        await fetch('/api/admin/logout', {
+        await fetch('/safekey/api/admin/logout', {
             method: 'POST',
             headers: { 'x-admin-token': token }
         });
@@ -108,7 +108,7 @@ btnCreate.addEventListener('click', async () => {
 
     setLoading(btnCreate, true);
     try {
-        const res = await fetch('/api/admin/keys', {
+        const res = await fetch('/safekey/api/admin/keys', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ btnRefresh.addEventListener('click', fetchKeys);
 
 async function fetchKeys() {
     try {
-        const res = await fetch('/api/admin/keys', {
+        const res = await fetch('/safekey/api/admin/keys', {
             headers: { 'x-admin-token': token }
         });
 

@@ -169,7 +169,7 @@ function adminAuth(req, res, next) {
 // ─── API Routes: Admin ──────────────────────────────────────
 
 // Admin login
-app.post('/api/admin/login', authLimiter, (req, res) => {
+app.post('/safekey/api/admin/login', authLimiter, (req, res) => {
     const { password } = req.body;
     if (password !== ADMIN_PASSWORD) {
         return res.status(401).json({ error: 'Sai mật khẩu' });
@@ -180,14 +180,14 @@ app.post('/api/admin/login', authLimiter, (req, res) => {
 });
 
 // Admin logout
-app.post('/api/admin/logout', adminAuth, (req, res) => {
+app.post('/safekey/api/admin/logout', adminAuth, (req, res) => {
     const token = req.headers['x-admin-token'];
     adminSessions.delete(token);
     res.json({ success: true });
 });
 
 // List all keys (admin view with decryption)
-app.get('/api/admin/keys', adminAuth, (req, res) => {
+app.get('/safekey/api/admin/keys', adminAuth, (req, res) => {
     const keys = loadKeys();
     const decryptedKeys = keys.map(k => {
         try {
@@ -216,7 +216,7 @@ app.get('/api/admin/keys', adminAuth, (req, res) => {
 });
 
 // Upload a new key
-app.post('/api/admin/keys', adminAuth, (req, res) => {
+app.post('/safekey/api/admin/keys', adminAuth, (req, res) => {
     const { gameKey, memo } = req.body;
     if (!gameKey || !memo) {
         return res.status(400).json({ error: 'Vui lòng nhập đầy đủ game key và ghi chú' });
@@ -249,7 +249,7 @@ app.post('/api/admin/keys', adminAuth, (req, res) => {
 });
 
 // Delete a key
-app.delete('/api/admin/keys/:id', adminAuth, (req, res) => {
+app.delete('/safekey/api/admin/keys/:id', adminAuth, (req, res) => {
     let keys = loadKeys();
     const idx = keys.findIndex(k => k.id === req.params.id);
     if (idx === -1) {
@@ -263,7 +263,7 @@ app.delete('/api/admin/keys/:id', adminAuth, (req, res) => {
 // ─── API Routes: User Redeem ────────────────────────────────
 
 // Step 1: Lookup by PIN
-app.post('/api/redeem/lookup', redeemLimiter, (req, res) => {
+app.post('/safekey/api/redeem/lookup', redeemLimiter, (req, res) => {
     const { pin } = req.body;
     if (!pin) {
         return res.status(400).json({ error: 'Vui lòng nhập mã PIN' });
@@ -285,7 +285,7 @@ app.post('/api/redeem/lookup', redeemLimiter, (req, res) => {
 });
 
 // Step 2: Send private code to email
-app.post('/api/redeem/send-code', redeemLimiter, async (req, res) => {
+app.post('/safekey/api/redeem/send-code', redeemLimiter, async (req, res) => {
     const { pin, email } = req.body;
     if (!pin || !email) {
         return res.status(400).json({ error: 'Vui lòng nhập mã PIN và email' });
@@ -335,7 +335,7 @@ app.post('/api/redeem/send-code', redeemLimiter, async (req, res) => {
 });
 
 // Step 3: Verify PIN + private code → reveal key
-app.post('/api/redeem/verify', redeemLimiter, (req, res) => {
+app.post('/safekey/api/redeem/verify', redeemLimiter, (req, res) => {
     const { pin, privateCode } = req.body;
     if (!pin || !privateCode) {
         return res.status(400).json({ error: 'Vui lòng nhập mã PIN và mã xác thực' });
@@ -380,11 +380,11 @@ app.post('/api/redeem/verify', redeemLimiter, (req, res) => {
 });
 
 // ─── SPA Fallback ────────────────────────────────────────────
-app.get('/admin', (req, res) => {
+app.get('/safekey/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
-app.get('/', (req, res) => {
+app.get('/safekey/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
